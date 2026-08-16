@@ -66,9 +66,6 @@ If 3000 is already busy, the app automatically uses the next free port and print
 npm start
 ```
 
-<img width="468" height="148" alt="Ekran Resmi 2026-08-16 16 43 50" src="https://github.com/user-attachments/assets/5b40cc43-fd9d-45f8-b012-99e34a0294dd" />
-
-
 4. Open forwarded port:
 
 <img width="936" height="296" alt="Adsız tasarım (9)" src="https://github.com/user-attachments/assets/9d6ff385-abc1-4938-ad62-4b10270b53d8" />

@@ -56,15 +56,22 @@ If 3000 is already busy, the app automatically uses the next free port and print
 ## Run with Codespaces:
 
 1. Open the repository on GitHub.
-2. Create a Codespace.
-3. Wait for `npm install`.
-4. Run:
+3. Create a Codespace.
+
+<img width="2916" height="1254" alt="Adsız tasarım (8)" src="https://github.com/user-attachments/assets/04c5f3a0-314a-4d2e-a837-4b65c9f0643e" />
+
+5. Run:
 
 ```bash
 npm start
 ```
 
-5. Open forwarded port `3000`.
+<img width="468" height="148" alt="Ekran Resmi 2026-08-16 16 43 50" src="https://github.com/user-attachments/assets/5b40cc43-fd9d-45f8-b012-99e34a0294dd" />
+
+
+4. Open forwarded port:
+
+<img width="980" height="171" alt="Ekran Resmi 2026-08-16 17 01 41" src="https://github.com/user-attachments/assets/1c55c0c8-dcdd-4af9-a1c4-5717d917c4fc" />
 
 ## Usage
 
@@ -80,18 +87,6 @@ npm start
 10. Track wallet results.
 
 Do not use armed wallets for other transactions before broadcast. Nonce changes can invalidate prepared transactions.
-
-## RPC
-
-Default public RPCs are included. You can add private/custom RPC endpoints in the UI or `.env`:
-
-```env
-RPC_ETHEREUM=
-RPC_BASE=
-RPC_ROBINHOOD=
-```
-
-Do not put private keys in `.env`.
 
 ## Limits
 

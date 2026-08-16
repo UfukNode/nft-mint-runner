@@ -71,7 +71,7 @@ npm start
 
 4. Open forwarded port:
 
-<img width="980" height="171" alt="Ekran Resmi 2026-08-16 17 01 41" src="https://github.com/user-attachments/assets/1c55c0c8-dcdd-4af9-a1c4-5717d917c4fc" />
+<img width="936" height="296" alt="Adsız tasarım (9)" src="https://github.com/user-attachments/assets/9d6ff385-abc1-4938-ad62-4b10270b53d8" />
 
 ## Usage
 

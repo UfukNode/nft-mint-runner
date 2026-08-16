@@ -4,6 +4,11 @@ Local browser-based tool for public SeaDrop NFT mints.
 
 It runs on your own machine, reads public mint configuration on-chain, prepares signed transactions locally, and broadcasts them through selected RPC endpoints. It is not a hosted service.
 
+## Main Advantage
+
+Prepare and sign transactions before the public mint starts.  
+When the timer starts, NFT Mint Runner automatically sends the pre-signed transactions through your selected RPC endpoints and executes the mint.
+
 ## Features
 
 - Browser UI, no terminal wizard.

@@ -30,7 +30,7 @@ Use fresh mint wallets with limited balances. Never paste a main wallet key.
 - First, follow my WSL installation guide: https://x.com/UfukDegen/status/1944066889346429338
 - After completing the WSL setup, run the commands below.
 
-### macOS:**
+### macOS:
 
 - Run the commands below in Terminal.
 

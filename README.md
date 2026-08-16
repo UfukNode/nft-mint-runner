@@ -32,11 +32,13 @@ npm install
 npm start
 ```
 
-Open:
+Open in Browser:
 
 ```text
 http://localhost:3000
 ```
+
+<img width="1261" height="533" alt="Ekran Resmi 2026-08-16 16 12 21" src="https://github.com/user-attachments/assets/cebc8525-5e3c-4b65-9f12-60eb935f6b99" />
 
 ## Codespaces
 

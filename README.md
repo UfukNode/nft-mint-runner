@@ -25,9 +25,7 @@ Use fresh mint wallets with limited balances. Never paste a main wallet key.
 
 ## Quick Start
 
-O zaman README’de şöyle yazman daha net olur:
-
-### Windows:**
+### Windows:
 
 - First, follow my WSL installation guide: https://x.com/UfukDegen/status/1944066889346429338
 - After completing the WSL setup, run the commands below.

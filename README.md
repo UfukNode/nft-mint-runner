@@ -1,6 +1,6 @@
 # NFT Mint Runner
 
-Local browser tool for public SeaDrop NFT mints.
+Local browser-based tool for public SeaDrop NFT mints.
 
 It runs on your own machine, reads public mint configuration on-chain, prepares signed transactions locally, and broadcasts them through selected RPC endpoints. It is not a hosted service.
 
@@ -16,6 +16,8 @@ It runs on your own machine, reads public mint configuration on-chain, prepares 
 - Pre-signed transactions before mint start.
 - Concurrent broadcast and per-wallet result tracking.
 - English and Turkish UI toggle.
+
+<img width="1261" height="533" alt="Ekran Resmi 2026-08-16 16 12 21" src="https://github.com/user-attachments/assets/cebc8525-5e3c-4b65-9f12-60eb935f6b99" />
 
 ## Security Warning
 
@@ -53,7 +55,6 @@ Local: http://localhost:3000
 
 If 3000 is already busy, the app automatically uses the next free port and prints it.
 
-<img width="1261" height="533" alt="Ekran Resmi 2026-08-16 16 12 21" src="https://github.com/user-attachments/assets/cebc8525-5e3c-4b65-9f12-60eb935f6b99" />
 
 ---
 

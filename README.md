@@ -23,7 +23,7 @@ Private keys stay only in the local Node process memory. They are not saved to d
 
 Use fresh mint wallets with limited balances. Never paste a main wallet key.
 
-## Quick Start
+## Run Locally (Recommended):
 
 ### Windows:
 
@@ -53,7 +53,7 @@ If 3000 is already busy, the app automatically uses the next free port and print
 
 <img width="1261" height="533" alt="Ekran Resmi 2026-08-16 16 12 21" src="https://github.com/user-attachments/assets/cebc8525-5e3c-4b65-9f12-60eb935f6b99" />
 
-## Codespaces
+## Run with Codespaces:
 
 1. Open the repository on GitHub.
 2. Create a Codespace.

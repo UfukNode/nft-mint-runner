@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SeaDrop Public Mint Tool</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1 data-i18n="appTitle">Public Mint Tool</h1>
+        </div>
+        <div class="topbar-status">
+          <div class="language-toggle" aria-label="Language">
+            <button class="language-button is-active" type="button" data-language="en">EN</button>
+            <button class="language-button" type="button" data-language="tr">TR</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="notice">
+        <strong data-i18n="securityLead">Use dedicated mint wallets.</strong>
+        <span data-i18n="securityCopy">Private keys are held only in this local Node process memory for the active session and are cleared on cancel, completion, timeout, or server restart.</span>
+      </section>
+
+      <section class="runtime-warning" id="runtimeWarning" hidden></section>
+
+      <div class="layout">
+        <section class="workspace">
+          <section class="panel" id="network">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="step1">Step 1</p>
+                <h2 data-i18n="selectNetwork">Select Network</h2>
+              </div>
+              <span class="subtle" id="networkHint" data-i18n="loadingNetworks">Loading networks...</span>
+            </div>
+            <div class="network-grid" id="networkGrid"></div>
+          </section>
+
+          <section class="panel" id="target">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="step2">Step 2</p>
+                <h2 data-i18n="nftTarget">NFT Target</h2>
+              </div>
+              <span class="subtle" data-i18n="targetHint">Raw contract or OpenSea URL</span>
+            </div>
+            <label class="field">
+              <span data-i18n="targetLabel">Contract or OpenSea URL</span>
+              <input id="targetInput" name="mint_target_contract_url" autocomplete="new-password" autocapitalize="none" spellcheck="false" readonly placeholder="0x... or https://opensea.io/assets/base/0x.../1" />
+            </label>
+            <div class="actions">
+              <button class="primary" id="analyzeButton" type="button" data-i18n="analyzeMint">Analyze Mint</button>
+              <span class="status-text" id="analyzeStatus"></span>
+            </div>
+          </section>
+
+          <section class="panel" id="analysisPanel" hidden>
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="sourceOnchain">Source: on-chain SeaDrop configuration</p>
+                <h2 id="collectionLabel">Mint Configuration</h2>
+              </div>
+              <span class="badge" id="stageBadge">-</span>
+            </div>
+            <div class="metrics" id="analysisMetrics"></div>
+            <div class="countdown" id="countdownBlock">
+              <span data-i18n="mintOpensIn">Mint opens in</span>
+              <strong id="countdown">--:--:--.---</strong>
+            </div>
+          </section>
+
+          <section class="panel" id="wallets">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="step3">Step 3</p>
+                <h2 data-i18n="localWallets">Local Wallets</h2>
+              </div>
+              <button class="ghost" id="clearWalletsButton" type="button" data-i18n="clearAll">Clear All</button>
+            </div>
+            <div class="inline-form">
+              <label class="field grow">
+                <span data-i18n="privateKey">Private key</span>
+                <input id="privateKeyInput" name="mint_signer_secret" type="password" autocomplete="new-password" autocapitalize="none" spellcheck="false" readonly />
+              </label>
+              <button class="secondary" id="addWalletButton" type="button" data-i18n="addWallet">Add Wallet</button>
+            </div>
+            <div class="wallet-list" id="walletList"></div>
+          </section>
+
+          <section class="panel" id="rpcs">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="step4">Step 4</p>
+                <h2 data-i18n="rpcEndpoints">RPC Endpoints</h2>
+              </div>
+              <button class="secondary" id="checkRpcButton" type="button" data-i18n="checkRpcs">Check RPCs</button>
+            </div>
+            <label class="field">
+              <span data-i18n="customRpcUrls">Custom RPC URLs</span>
+              <textarea id="rpcInput" autocomplete="off" autocapitalize="none" rows="4" spellcheck="false" placeholder="Paste several endpoints. Wrong-chain endpoints are excluded." data-i18n-placeholder="customRpcPlaceholder"></textarea>
+            </label>
+            <div class="rpc-list" id="rpcList"></div>
+          </section>
+
+          <section class="panel" id="settings">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="step5">Step 5</p>
+                <h2 data-i18n="quantityGas">Quantity and Gas</h2>
+              </div>
+              <span class="subtle" id="baseFeeLabel">Fee</span>
+            </div>
+            <div class="settings-grid">
+              <label class="field">
+                <span data-i18n="nftsPerWallet">NFTs per wallet</span>
+                <input id="quantityInput" type="number" min="1" value="1" />
+              </label>
+              <label class="field">
+                <span data-i18n="maxFeeGas">Max fee per gas (gwei)</span>
+                <input id="maxFeeInput" inputmode="decimal" value="2" />
+              </label>
+              <label class="field">
+                <span data-i18n="priorityFee">Priority fee (gwei)</span>
+                <input id="priorityFeeInput" inputmode="decimal" value="0.05" />
+              </label>
+              <label class="field">
+                <span data-i18n="gasLimit">Gas limit</span>
+                <input id="gasLimitInput" inputmode="numeric" value="160000" />
+              </label>
+            </div>
+            <p class="control-warning" data-i18n="autoTiming">Execution timing is automatic. Live stages broadcast immediately; upcoming stages wait for the on-chain start time.</p>
+            <p class="control-warning" data-i18n="refreshGas">Gas refreshes immediately before broadcast and transactions are re-signed locally.</p>
+            <div class="actions">
+              <button class="secondary" id="validateButton" type="button" data-i18n="validate">Validate</button>
+              <button class="primary" id="prepareButton" type="button" disabled data-i18n="prepareMint">Prepare Mint</button>
+              <span class="status-text" id="settingsStatus"></span>
+            </div>
+            <div class="readiness" id="readinessList"></div>
+          </section>
+
+          <section class="panel" id="executionControl">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="executionControlStep">Execution</p>
+                <h2 data-i18n="executionControl">Execution Control</h2>
+              </div>
+              <span class="badge" data-i18n="fastPath">Fast path</span>
+            </div>
+            <p class="control-warning" data-i18n="nonceWarning">Prepared transactions use current wallet nonces. Do not use these wallets elsewhere before broadcast.</p>
+            <div class="actions">
+              <button class="primary" id="armButton" type="button" disabled data-i18n="confirmArm">Confirm & Arm</button>
+              <span class="status-text" id="armStatus"></span>
+            </div>
+          </section>
+
+          <section class="panel" id="results">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="step7">Step 7</p>
+                <h2 data-i18n="walletResults">Wallet Results</h2>
+              </div>
+              <span class="subtle" id="resultStatus">No execution yet</span>
+            </div>
+            <div class="result-list" id="resultList"></div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

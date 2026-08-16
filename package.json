@@ -1,0 +1,26 @@
+{
+  "name": "nft-mint-runner",
+  "version": "0.1.0",
+  "description": "Local browser tool for public SeaDrop NFT mints.",
+  "type": "module",
+  "main": "src/server/index.ts",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "tsx src/server/index.ts",
+    "dev": "tsx watch src/server/index.ts",
+    "test": "tsx --test test/*.test.ts",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ethers": "^6.13.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

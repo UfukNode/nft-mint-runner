@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+coverage/
+*.key
+wallets/
+npm-debug.log*
+.DS_Store

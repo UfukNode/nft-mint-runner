@@ -1,15 +1,18 @@
 import "dotenv/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import type { Server } from "node:http";
 import express from "express";
 import { createApiRouter } from "./api.js";
 import { redactText } from "../core/secrets.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(__dirname, "../../public");
-const port = Number.parseInt(process.env.PORT || "3000", 10);
+const configuredPort = Number.parseInt(process.env.PORT || "3000", 10);
+const preferredPort = Number.isFinite(configuredPort) ? configuredPort : 3000;
 const codespaces = Boolean(process.env.CODESPACES || process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN);
 const host = process.env.HOST || (codespaces ? "0.0.0.0" : "127.0.0.1");
+let activePort = preferredPort;
 
 const app = express();
 app.disable("x-powered-by");
@@ -29,17 +32,41 @@ app.use(
 app.get("*", (_request, response) => response.sendFile(path.join(publicDir, "index.html")));
 app.use(errorHandler);
 
-app.listen(port, host, () => {
+startServer(preferredPort);
+
+function startServer(port: number): void {
+  const server = app.listen(port, host);
+  server.once("listening", () => {
+    activePort = port;
+    printStartup(port);
+  });
+  server.once("error", (error: NodeJS.ErrnoException) => {
+    handleListenError(error, server, port);
+  });
+}
+
+function handleListenError(error: NodeJS.ErrnoException, server: Server, port: number): void {
+  server.close();
+  if (error.code === "EADDRINUSE" && port < preferredPort + 20) {
+    const nextPort = port + 1;
+    console.log(`Port ${port} is already in use. Trying ${nextPort}...`);
+    startServer(nextPort);
+    return;
+  }
+  throw error;
+}
+
+function printStartup(port: number): void {
   const localUrl = `http://localhost:${port}`;
   console.log("");
-  console.log("SeaDrop Mint Tool running");
+  console.log("NFT Mint Runner running");
   console.log("");
   console.log(`Local: ${localUrl}`);
   if (codespaces) {
     console.log("Codespaces: open the forwarded port from the Ports tab.");
   }
   console.log("");
-});
+}
 
 function originGuard(request: express.Request, response: express.Response, next: express.NextFunction): void {
   const origin = request.headers.origin;
@@ -51,7 +78,7 @@ function originGuard(request: express.Request, response: express.Response, next:
     const parsed = new URL(origin);
     const allowedHosts = new Set(["localhost", "127.0.0.1", "::1"]);
     const isCodespaces = parsed.hostname.endsWith(".app.github.dev");
-    if ((allowedHosts.has(parsed.hostname) || isCodespaces) && parsed.port === String(port)) {
+    if ((allowedHosts.has(parsed.hostname) || isCodespaces) && parsed.port === String(activePort)) {
       next();
       return;
     }

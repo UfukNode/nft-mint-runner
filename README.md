@@ -41,7 +41,7 @@ npm install
 npm start
 ```
 
-Open the URL printed after `Local:`.
+- Open the URL printed after:
 
 Example:
 

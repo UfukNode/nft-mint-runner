@@ -90,12 +90,6 @@ npm test
 npm run check
 ```
 
-## Credits
-
-Inspired by the workflow concept of https://github.com/morsyxbt/nft-public-mint.
-
-This is an independently implemented web application.
-
 ## License
 
 MIT
